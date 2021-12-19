@@ -138,6 +138,7 @@ class CovidData():
         for i in reversed(range(0,daysdelta)):
             datefind = str(datetime.datetime.now().date() - datetime.timedelta(days=i))
             self.PopulateDebug(datefind)
+        print("Made File")
     def ShowReport(self, duration:int) -> dict:
         Lisiting = self.GetReportData(duration)
         sumNewCases = 0
