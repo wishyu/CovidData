@@ -1,4 +1,5 @@
 import json
+import os
 import os.path
 import datetime
 import http.client
@@ -48,7 +49,7 @@ class CovidData():
         updated = str(datetime.datetime.now().date())
         ListingToday = {updated: DailyCOVIDDATA}
         # How big should be the timeline: Beeg file since start or Smol per month file
-        LocalTimelineCovidFile = COVID_TIMELINE_FILE
+        LocalTimelineCovidFile = os.environ.get("COVID_TIMELINE_FILE")
         # LocalTimelineCovidFile = time.strftime("%Y-%m")  + "_Covid_Timeline.json"
         if os.path.exists(LocalTimelineCovidFile):
             # File exist
@@ -70,7 +71,7 @@ class CovidData():
     def GetReportData(self, daysdelta:int) -> dict:
         # Returns mutltiple days COVIDDATA
         daterange = str(datetime.datetime.now().date() - datetime.timedelta(days=daysdelta))
-        LocalTimelineCovidFile = COVID_TIMELINE_FILE
+        LocalTimelineCovidFile = os.environ.get("COVID_TIMELINE_FILE")
         listing:dict = None       
         if os.path.exists(LocalTimelineCovidFile):
             # File exist
@@ -93,7 +94,7 @@ class CovidData():
     def GetSetCovidData(self, daysdelta:int) -> dict:
         # Returns single day COVIDDATA
         daterange = str(datetime.datetime.now().date() - datetime.timedelta(days=daysdelta))
-        LocalTimelineCovidFile = COVID_TIMELINE_FILE
+        LocalTimelineCovidFile = os.environ.get("COVID_TIMELINE_FILE")
         listing:dict = None
         if os.path.exists(LocalTimelineCovidFile):
             # File exist
@@ -113,7 +114,7 @@ class CovidData():
         DailyCOVIDDATA = self.__data
         updated = updatedIterate
         ListingToday = {updated: DailyCOVIDDATA}
-        LocalTimelineCovidFile = COVID_TIMELINE_FILE
+        LocalTimelineCovidFile = os.environ.get("COVID_TIMELINE_FILE")
         if os.path.exists(LocalTimelineCovidFile):
             # File exist
             with open(LocalTimelineCovidFile, "r+", encoding='utf-8') as file:
