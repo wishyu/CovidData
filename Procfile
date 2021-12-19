@@ -1,1 +1,1 @@
-web: ScheduleTask.py
+web: python ScheduleTask.py
