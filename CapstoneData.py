@@ -1,5 +1,4 @@
 import json
-import time
 import os.path
 import datetime
 import http.client
