@@ -157,8 +157,3 @@ class CovidData():
         print("Weekly Report:")
         report = self.ShowReport(7)
         print(report["reportstr"])
-
-a = CovidData()
-a.UpdateLocalReportData()
-a.GetSetCovidData(0)
-a.ShowCovidData()
