@@ -1,8 +1,5 @@
 import ftplib
-from dotenv import load_dotenv
 
-
-load_dotenv()
 def upload_file():
     # open session
     session = ftplib.FTP(ftp_host, ftp_username, ftp_password)
