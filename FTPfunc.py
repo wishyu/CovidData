@@ -2,25 +2,32 @@ import ftplib
 import os
 
 def upload_file():
+    ftp_host = os.environ.get("ftp_host")
+    ftp_username = os.environ.get("ftp_username")
+    ftp_password = os.environ.get("ftp_password")
+    filename = "/files/"  + os.environ.get("COVID_TIMELINE_FILE")
+    localfile = "tmp/" + os.environ.get("COVID_TIMELINE_FILE")
     # open session
-    os.environ.get("ftp_host")
-    os.environ.get("ftp_username")
-    os.environ.get("ftp_password")
-
-    session = ftplib.FTP(os.environ.get("ftp_host"), os.environ.get("ftp_username"), os.environ.get("ftp_password"))
-    file = open(os.environ.get("COVID_TIMELINE_FILE"), 'rb')  # file to send
-    session.storbinary('STOR '+os.environ.get("COVID_TIMELINE_FILE"), file)  # send the file
-  
+    session = ftplib.FTP(ftp_host, ftp_username, ftp_password)
+    file = open(localfile, 'rb')  # file to send
+    session.storbinary('STOR '+filename, file)  # send the file
+    
     file.close()  # close file and FTP session
     session.quit()
 
 def download_file():
+    ftp_host = os.environ.get("ftp_host")
+    ftp_username = os.environ.get("ftp_username")
+    ftp_password = os.environ.get("ftp_password")
+    filename = "/files/"  + os.environ.get("COVID_TIMELINE_FILE")
+    localfile = "tmp/" + os.environ.get("COVID_TIMELINE_FILE")
     # open session
-    session = ftplib.FTP(os.environ.get("ftp_host"), os.environ.get("ftp_username"), os.environ.get("ftp_password"))
-    f = open(os.environ.get("COVID_TIMELINE_FILE"), 'wb')  # save into local file
-    session.retrbinary('RETR ' +os.environ.get("COVID_TIMELINE_FILE"), f.write, 1024)
+    session = ftplib.FTP(ftp_host, ftp_username, ftp_password)
+    f = open(localfile, 'wb')  # save into local file
+    session.retrbinary('RETR ' + filename, f.write, 1024)
     
     f.close()  # close file and FTP session
     session.quit()
     # Open local file
-upload_file()
+    # f = open(localfile, 'rb')
+    # content = f.read()
