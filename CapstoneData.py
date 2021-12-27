@@ -30,6 +30,8 @@ class CovidData():
         self.__data = None
     def GetOnlineData(self):
         self.__data = GetWorldometersPH()
+        for i in ("updated","country","countryInfo","population","continent"):
+            del self.__data[i]
     def ShowCovidData(self) -> dict:
         print("Cases: "+str(self.__data["cases"]))
         print("Cases Today: "+str(self.__data["todayCases"]))
