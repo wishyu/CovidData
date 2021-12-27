@@ -55,6 +55,7 @@ class CovidData():
             # File exist
             with open(LocalTimelineCovidFile, "r+", encoding='utf-8') as file:
                 ListingPrev:dict = json.load(file)
+                print(type(ListingPrev))
                 if updated not in ListingPrev:
                     ListingPrev.update(ListingToday)
                 else:
