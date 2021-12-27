@@ -11,6 +11,6 @@ def scheduled_job():
     a.UpdateLocalReportData()
     a.ShowCovidData()
     FTPfunc.upload_file()
-    print('This job is run every weekday at 5pm.')
+    print('This job is run every weekday at 330pm.')
 
 sched.start()
