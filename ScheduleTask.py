@@ -14,7 +14,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 #     print('This job is run every weekday at 430pm.')
 
 # sched.start()
-
+print("yass")
 a = CovidData()
 FTPfunc.download_file()
 a.UpdateLocalReportData()
