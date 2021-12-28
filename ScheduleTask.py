@@ -4,7 +4,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', hour=22, minute=45)
+@sched.scheduled_job('cron', hour=22, minute=50)
 def scheduled_job():
     FTPfunc.download_file()
     a = CovidData()
