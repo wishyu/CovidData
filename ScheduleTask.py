@@ -6,8 +6,9 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('cron', hour=16, minute=50)
 def scheduled_job():
-    FTPfunc.download_file()
+    print("5:00")
     a = CovidData()
+    FTPfunc.download_file()
     a.UpdateLocalReportData()
     a.ShowCovidData()
     FTPfunc.upload_file()
