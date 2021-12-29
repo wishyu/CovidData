@@ -12,3 +12,4 @@ def scheduled_job():
     a.ShowCovidData()
     FTPfunc.upload_file()
     print('Tweet Me')
+sched.start()
