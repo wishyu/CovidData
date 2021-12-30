@@ -24,6 +24,7 @@ def download_file():
     # open session
     session = ftplib.FTP(ftp_host, ftp_username, ftp_password)
     f = open(localfile, 'wb')  # save into local file
+    print('RETR ' + filename)
     session.retrbinary('RETR ' + filename, f.write, 1024)
     
     f.close()  # close file and FTP session
