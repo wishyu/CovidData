@@ -44,15 +44,11 @@ class CovidData():
         print("Tests: "+str(self.__data["tests"]))
         return self.__data
     def UpdateLocalReportData(self):
-        # Run this function for COVIDDATA Monthly and Weekly comparison
-        # Run this function at the same time, perhaps?
         self.GetOnlineData()
         DailyCOVIDDATA = self.__data
         updated = str(datetime.datetime.now().date())
         ListingToday = {updated: DailyCOVIDDATA}
-        # How big should be the timeline: Beeg file since start or Smol per month file
         LocalTimelineCovidFile = "/tmp/" + os.environ.get("COVID_TIMELINE_FILE")
-        # LocalTimelineCovidFile = time.strftime("%Y-%m")  + "_Covid_Timeline.json"
         if os.path.exists(LocalTimelineCovidFile):
             # File exist
             with open(LocalTimelineCovidFile, "r+", encoding='utf-8') as file:
@@ -82,6 +78,7 @@ class CovidData():
                 listing = json.load(file)
                 file.close()
         else:
+            print("No Records Found")
             return
         if daterange in listing:
             returnlisting:dict = None
@@ -107,41 +104,13 @@ class CovidData():
         else:
             return
         if daterange in listing:
+            print(str(daterange) + " DATA FOUND")
             self.SetData(listing[daterange])
             return listing[daterange]
         else:
-            print("Not Found")
-    def PopulateDebug(self, updatedIterate:str):
-        # This function is used for testing purposes, do not use
-        self.GetOnlineData()
-        DailyCOVIDDATA = self.__data
-        updated = updatedIterate
-        ListingToday = {updated: DailyCOVIDDATA}
-        LocalTimelineCovidFile = "/tmp/" + os.environ.get("COVID_TIMELINE_FILE")
-        if os.path.exists(LocalTimelineCovidFile):
-            # File exist
-            with open(LocalTimelineCovidFile, "r+", encoding='utf-8') as file:
-                ListingPrev:dict = json.load(file)
-                if updated not in ListingPrev:
-                    ListingPrev.update(ListingToday)
-                else:
-                    self.SetData(ListingPrev[updated])
-                file.seek(0)
-                json.dump(ListingPrev, file, ensure_ascii=False, indent=4)
-                file.close()
-        else:
-            # File does not exist
-            with open(LocalTimelineCovidFile, "w", encoding='utf-8') as file:
-                ListingPrev = ListingToday
-                json.dump(ListingToday, file, ensure_ascii=False, indent=4)
-                file.close()
-    def PopulateTimeline(self):
-        # This function is used for testing purposed, do not use
-        daysdelta = 60
-        for i in reversed(range(0,daysdelta)):
-            datefind = str(datetime.datetime.now().date() - datetime.timedelta(days=i))
-            self.PopulateDebug(datefind)
-        print("Made File")
+            print(str(daterange) + " DATA NOT FOUND")
+            self.ResetCurrentData()
+            return None
     def GetReport(self, duration:int) -> dict:
         Lisiting = self.GetReportData(duration)
         sumNewCases = 0
