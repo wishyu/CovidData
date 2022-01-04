@@ -142,7 +142,7 @@ class CovidData():
             datefind = str(datetime.datetime.now().date() - datetime.timedelta(days=i))
             self.PopulateDebug(datefind)
         print("Made File")
-    def ShowReport(self, duration:int) -> dict:
+    def GetReport(self, duration:int) -> dict:
         Lisiting = self.GetReportData(duration)
         sumNewCases = 0
         sumNewDeath = 0
@@ -156,10 +156,13 @@ class CovidData():
         report += "\nNew Cases: " + str(sumNewCases) + "\nNew Death: " + str(sumNewDeath) + "\nNew Recovered: " + str(sumNewRecov)
         reportdict = {"totalCases": sumNewCases, "totalDeath": sumNewDeath,"sumNewRecov": sumNewRecov,"reportstr":report}
         return reportdict
-    def Monthly(self):
-        print("Monthly Report:")
-        self.ShowReport(30)
-    def Weekly(self):
-        print("Weekly Report:")
-        report = self.ShowReport(7)
-        print(report["reportstr"])
+    def Monthly(self) -> str:
+        report = self.GetReport(30)
+        toReturn = "Monthly Report:\n" + report["reportstr"]
+        print(toReturn)
+        return toReturn
+    def Weekly(self) -> str:
+        report = self.GetReport(7)
+        toReturn = "Weekly Report:\n" + report["reportstr"]
+        print(toReturn)
+        return toReturn
