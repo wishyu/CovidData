@@ -5,7 +5,7 @@ def upload_file():
     ftp_host = os.environ.get("ftp_host")
     ftp_username = os.environ.get("ftp_username")
     ftp_password = os.environ.get("ftp_password")
-    filename = "/htdocs/files"  + os.environ.get("COVID_TIMELINE_FILE")
+    filename = "/htdocs/files/"  + os.environ.get("COVID_TIMELINE_FILE")
     localfile = "/tmp/" + os.environ.get("COVID_TIMELINE_FILE")
     # open session
     session = ftplib.FTP(ftp_host, ftp_username, ftp_password)
@@ -19,7 +19,7 @@ def download_file():
     ftp_host = os.environ.get("ftp_host")
     ftp_username = os.environ.get("ftp_username")
     ftp_password = os.environ.get("ftp_password")
-    filename = "/htdocs/files"  + os.environ.get("COVID_TIMELINE_FILE")
+    filename = "/htdocs/files/"  + os.environ.get("COVID_TIMELINE_FILE")
     localfile = "/tmp/" + os.environ.get("COVID_TIMELINE_FILE")
     # open session
     session = ftplib.FTP(ftp_host, ftp_username, ftp_password)
