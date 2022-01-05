@@ -4,7 +4,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', hour=16, minute=30)
+@sched.scheduled_job('cron', hour=16, minute=40)
 def scheduled_job():
     print("4:00")
     a = CovidData()
