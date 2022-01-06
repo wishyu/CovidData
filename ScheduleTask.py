@@ -4,7 +4,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', hour=16, minute=40)
+@sched.scheduled_job('cron', hour=17, minute=45)
 def scheduled_job():
     # Daily Report and Record Update @ 4:40pm
     print("Updating Covid Data File and Posting to Twitter")
@@ -21,7 +21,6 @@ def scheduled_job():
     a = CovidData()
     FTPfunc.download_file()
     toPrint = a.Weekly() # Returns string for twitter posting, add custom module
-    FTPfunc.upload_file()
     print(toPrint)
 @sched.scheduled_job('cron', day ="last sat", hour=16, minute=50, day_of_week="sat")
 def scheduled_job():
@@ -30,6 +29,5 @@ def scheduled_job():
     a = CovidData()
     FTPfunc.download_file()
     toPrint = a.Monthly() # Returns string for twitter posting, add custom module
-    FTPfunc.upload_file()
     print(toPrint)
 sched.start()
